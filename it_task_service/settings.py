@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "crispy_forms",
-    "taxi",
+    "it_task",
 ]
 
 MIDDLEWARE = [
@@ -103,7 +103,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-AUTH_USER_MODEL = "taxi.Worker"
+AUTH_USER_MODEL = "it_task.Worker"
 
 LOGIN_REDIRECT_URL = "/"
 
