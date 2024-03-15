@@ -17,6 +17,17 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from it_task.views import TaskTypeListView, TaskTypeCreateView, TaskTypeUpdateView, TaskTypeDeleteView, \
+    PositionListView, PositionCreateView, PositionUpdateView, PositionDeleteView
+
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path("task-type-list/", TaskTypeListView.as_view(), name="task-type-list"),
+    path("task-type-list/create", TaskTypeCreateView.as_view(), name="task-type-create"),
+    path("task-type-list/<int:pk>/update", TaskTypeUpdateView.as_view(), name="task-type-update"),
+    path("task-type-list/<int:pk>/delete", TaskTypeDeleteView.as_view(), name="task-type-delete"),
+    path("position-list/", PositionListView.as_view(), name="position-list"),
+    path("position-list/create", PositionCreateView.as_view(), name="position-create"),
+    path("position-list/<int:pk>/update", PositionUpdateView.as_view(), name="position-update"),
+    path("position-list/<int:pk>/delete", PositionDeleteView.as_view(), name="position-delete"),
 ]
