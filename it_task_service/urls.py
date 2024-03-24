@@ -18,7 +18,8 @@ from django.contrib import admin
 from django.urls import path
 
 from it_task.views import TaskTypeListView, TaskTypeCreateView, TaskTypeUpdateView, TaskTypeDeleteView, \
-    PositionListView, PositionCreateView, PositionUpdateView, PositionDeleteView
+    PositionListView, PositionCreateView, PositionUpdateView, PositionDeleteView, TaskListView, TaskCreateView, \
+    TaskUpdateView, TaskDeleteView, WorkerListView
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -30,4 +31,9 @@ urlpatterns = [
     path("position-list/create", PositionCreateView.as_view(), name="position-create"),
     path("position-list/<int:pk>/update", PositionUpdateView.as_view(), name="position-update"),
     path("position-list/<int:pk>/delete", PositionDeleteView.as_view(), name="position-delete"),
+    path("task-list/<int:pk>", TaskListView.as_view(), name="task-list"),
+    path("task-list/create", TaskCreateView.as_view(), name="task-create"),
+    path("task-list/<int:pk>/update", TaskUpdateView.as_view(), name="task-update"),
+    path("task-list/<int:pk>/delete", TaskDeleteView.as_view(), name="task-delete"),
+    path("worker-list/", WorkerListView.as_view(), name="task-delete")
 ]

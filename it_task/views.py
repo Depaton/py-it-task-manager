@@ -6,7 +6,7 @@ from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 from it_task.forms import TaskTypeSearchForm, PositionSearchForm
-from it_task.models import Task, TaskType, Position
+from it_task.models import Task, TaskType, Position, Worker
 
 
 class TaskTypeListView(generic.ListView):
@@ -82,3 +82,35 @@ class PositionUpdateView(generic.UpdateView):
 class PositionDeleteView(generic.DeleteView):
     model = Position
     success_url = reverse_lazy("position-list")
+
+
+class TaskListView(generic.ListView):
+    model = Task
+    paginate_by = 10
+
+    def get_queryset(self, **kwargs):
+        qs = super().get_queryset(**kwargs)
+        return qs.filter(task_type_id=self.kwargs['pk'])
+
+
+
+class TaskCreateView(generic.CreateView):
+    model = Task
+    fields = "__all__"
+    success_url = reverse_lazy("task-list")
+
+
+class TaskUpdateView(generic.UpdateView):
+    model = Task
+    fields = "__all__"
+    success_url = reverse_lazy("task-list")
+
+
+class TaskDeleteView(generic.DeleteView):
+    model = Task
+    success_url = reverse_lazy("task-list")
+
+
+class WorkerListView(generic.ListView):
+    model = Worker
+    paginate_by = 10

@@ -40,4 +40,4 @@ class Task(models.Model):
     ]
     priority = models.CharField(max_length=10, choices=PRIORITY_CHOICES, default='medium')
     task_type = models.ForeignKey(TaskType, on_delete=models.CASCADE)
-    assignees = models.ManyToManyField(Worker, related_name="workers")
+    assignees = models.ManyToManyField(Worker, related_name="workers", null=True, blank=True)
