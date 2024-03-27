@@ -24,7 +24,7 @@ class Worker(AbstractUser):
         verbose_name_plural = "workers"
 
     def __str__(self):
-        return f"{self.position} - {self.username} ({self.first_name} {self.last_name})"
+        return f"{self.position} - {self.first_name} {self.last_name}"
 
 
 class Task(models.Model):
@@ -33,11 +33,11 @@ class Task(models.Model):
     deadline = models.DateField()
     is_completed = models.BooleanField()
     PRIORITY_CHOICES = [
-        ("low", "Low"),
-        ("medium", "Medium"),
-        ("high", "High"),
-        ("urgent", "Urgent")
+        ("Low", "Low"),
+        ("Medium", "Medium"),
+        ("High", "High"),
+        ("Urgent", "Urgent")
     ]
     priority = models.CharField(max_length=10, choices=PRIORITY_CHOICES, default='medium')
     task_type = models.ForeignKey(TaskType, on_delete=models.CASCADE)
-    assignees = models.ManyToManyField(Worker, related_name="workers", null=True, blank=True)
+    assignees = models.ManyToManyField(Worker, related_name="workers", blank=True)

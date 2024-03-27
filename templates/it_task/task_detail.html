@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>
+    {{ task.task_type }} Task - {{ task.name }}
+
+    <a href="{% url 'task-update' pk=task.id %}" class="btn btn-primary link-to-page">
+      Update
+    </a>
+    <a href="{% url 'task-delete' pk=task.id %}" class="btn btn-danger link-to-page">
+      Delete
+    </a>
+  </h1>
+  <div class="word-wrap">
+    <p><strong>Priority</strong> {{ task.priority }}</p>
+    <p><strong>Complete:</strong> {{ task.is_completed }}</p>
+    <div class="w-100">
+      <p><strong>Description:</strong> {{ task.description }}</p>
+    </div>
+    <p><strong>Workers:</strong></p>
+  </div>
+  {% for worker in assigned_workers %}
+    <div class="ml-3">
+      <p>{{ worker }}</p>
+    </div>
+  {% empty %}
+    <div class="ml-3">
+      <p>No workers!</p>
+    </div>
+  {% endfor %}
+{% endblock %}

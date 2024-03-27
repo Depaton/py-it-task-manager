@@ -3,8 +3,8 @@
 
 {% block content %}
   <h1>
-    Task Type List
-    <a href="{% url 'task-type-create'%}" class="btn btn-primary link-to-page">
+    Worker List
+    <a href="{% url 'worker-create'%}" class="btn btn-primary link-to-page">
       Create
     </a>
     {% load crispy_forms_tags %}
@@ -16,27 +16,35 @@
 
   </h1>
     </form>
-  {% if task_type_list %}
+  {% if worker_list %}
     <table class="table">
       <tr>
-        <th>Name</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Position</th>
         <th>Update</th>
         <th>Delete</th>
       </tr>
 
-      {% for task_type in task_type_list %}
+      {% for worker in worker_list %}
         <tr>
           <td>
-              {{ task_type.name }}
+              {{ worker.first_name }}
           </td>
           <td>
-              <a href="{% url 'task-type-update' pk=task_type.id%}">
+              {{ worker.last_name }}
+          </td>
+          <td>
+              {{ worker.position}}
+          </td>
+          <td>
+              <a href="{% url 'worker-update' pk=worker.id%}">
                 Update
               </a>
             </td>
             <td>
               <a style="color: red"
-                href="{% url 'task-type-delete' pk=task_type.id%}">
+                href="{% url 'worker-delete' pk=worker.id%}">
                 Delete
               </a>
             </td>
@@ -45,6 +53,6 @@
     </table>
 
   {% else %}
-      <p>There are no task name in manager.</p>
+      <p>There are no workers in manager.</p>
   {% endif %}
 {% endblock %}

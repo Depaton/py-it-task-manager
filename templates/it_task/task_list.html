@@ -3,7 +3,7 @@
 
 {% block content %}
   <h1>
-    Task {{task_type_name}} List
+    Task {{object.name}} List
     <a href="{% url 'task-create'%}" class="btn btn-primary link-to-page">
       Create
     </a>
@@ -21,7 +21,6 @@
       <tr>
         <th>Task type</th>
         <th>Name</th>
-        <th>Description</th>
         <th>Priority</th>
         <th>Deadline</th>
         <th>Complete</th>
@@ -37,10 +36,7 @@
               {{ task.task_type }}
           </td>
           <td>
-              {{ task.name }}
-            </td>
-            <td>
-              {{ task.description }}
+              <a href="{% url 'task-detail' pk=task.id%}">{{ task.name }}
             </td>
             <td>
               {{ task.priority }}
@@ -52,7 +48,11 @@
               {{ task.is_completed }}
             </td>
             <td>
-              {{ task.assignees }}
+              {%  if task.assignees.exists %}
+                Assigned
+              {% else %}
+                No Workers
+              {%endif%}
             </td>
             <td>
               <a href="{% url 'task-update' pk=task.id%}">Update</a>
