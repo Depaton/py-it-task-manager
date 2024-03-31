@@ -5,7 +5,8 @@ from django.urls import reverse_lazy
 from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-from it_task.forms import TaskTypeSearchForm, PositionSearchForm, WorkerCreationForm, TaskForm, TaskSearchForm
+from it_task.forms import TaskTypeSearchForm, PositionSearchForm, WorkerCreationForm, TaskForm, TaskSearchForm, \
+    WorkerSearchForm
 from it_task.models import Task, TaskType, Position, Worker
 
 
@@ -31,8 +32,8 @@ class TaskTypeListView(generic.ListView):
             )
         else:
             queryset = self.model.objects.all()
-
         return queryset
+
 
 class TaskTypeCreateView(generic.CreateView):
     model = TaskType
@@ -63,13 +64,12 @@ class PositionListView(generic.ListView):
     def get_queryset(self):
         form = PositionSearchForm(self.request.GET)
         if form.is_valid():
-            queryset = self.model.objects.filter(
+            qs = self.model.objects.filter(
                 name__icontains=form.cleaned_data["name"]
             )
         else:
-            queryset = self.model.objects.all()
-
-        return queryset
+            qs = self.model.objects.all()
+        return qs
 
 class PositionCreateView(generic.CreateView):
     model = Position
@@ -92,7 +92,6 @@ class TaskListView(generic.ListView):
     model = Task
     paginate_by = 10
 
-
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(TaskListView, self).get_context_data(**kwargs)
         context["search_form"] = TaskSearchForm()
@@ -100,8 +99,8 @@ class TaskListView(generic.ListView):
 
     def get_queryset(self, **kwargs):
         qs = super().get_queryset(**kwargs)
-        qs = qs.filter(task_type_id=self.kwargs['pk'])
-        form = PositionSearchForm(self.request.GET)
+        qs = qs.filter(task_type_id=self.kwargs["pk"])
+        form = TaskSearchForm(self.request.GET)
         if form.is_valid():
             qs = qs.filter(name__icontains=form.cleaned_data["name"])
         return qs
@@ -150,6 +149,22 @@ class TaskDeleteView(generic.DeleteView):
 class WorkerListView(generic.ListView):
     model = Worker
     paginate_by = 10
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(WorkerListView, self).get_context_data(**kwargs)
+        context["search_form"] = WorkerSearchForm()
+        return context
+
+    def get_queryset(self, **kwargs):
+        qs = super(WorkerListView, self).get_queryset(**kwargs)
+        if 'pk' in self.kwargs and self.kwargs['pk']:
+            qs = qs.filter(position_id=self.kwargs["pk"])
+        form = WorkerSearchForm(self.request.GET)
+        if form.is_valid():
+            last_name = form.cleaned_data.get("last_name")
+            if last_name:
+                qs = qs.filter(last_name__icontains=last_name)
+        return qs
 
 
 class WorkerCreateView(generic.CreateView):
