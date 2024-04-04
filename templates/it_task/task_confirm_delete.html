@@ -6,6 +6,6 @@
     {% csrf_token %}
     <p>Are you sure you want to delete {{ object.task_type }} Task  - {{ object.name }}"?</p>
     <input type="submit" value="Yes, delete" class="btn btn-danger">
-    <a href="{% url 'task-detail' object.id %}" class="btn btn-secondary">Cancel</a>
+    <a href="#" class="btn btn-secondary" onclick="window.history.back()">Cancel</a>
   </form>
 {% endblock %}

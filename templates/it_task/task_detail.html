@@ -21,7 +21,11 @@
   </div>
   {% for worker in assigned_workers %}
     <div class="ml-3">
-      <p>{{ worker }}</p>
+      <p>
+        <a href="{% url 'worker-detail' pk=worker.id %}">
+          {{ worker }}
+        </a>
+      </p>
     </div>
   {% empty %}
     <div class="ml-3">
