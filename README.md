@@ -6,9 +6,13 @@ The project is a web application designed to streamline task management and coll
 Technologies Used
 
 -Python/Django for backend development
+
 -HTML for frontend development
+
 -Git for version control
+
 -GitHub Actions for continuous integration
+
 -Bootstrap for frontend styling
 
 Database Schema
@@ -19,6 +23,9 @@ The database schema consists of several tables to store information related to u
 Installation Instructions
 
 -Install Python and Django.
+
 -Clone the repository from GitHub.
+
 -Run database migrations using Django's management commands.
+
 -Start the development server to run the application locally.
