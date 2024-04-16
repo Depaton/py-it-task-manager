@@ -4,8 +4,14 @@ from django.urls import reverse_lazy
 from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-from it_task.forms import TaskTypeSearchForm, PositionSearchForm, WorkerCreationForm, TaskForm, TaskSearchForm, \
+from it_task.forms import (
+    TaskTypeSearchForm,
+    PositionSearchForm,
+    WorkerCreationForm,
+    TaskForm,
+    TaskSearchForm,
     WorkerSearchForm
+)
 from it_task.models import Task, TaskType, Position, Worker
 
 
