@@ -1,33 +1,32 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <h1>
-    Worker
-    <a href="{% url 'worker-update' pk=worker.id%}" class="btn btn-success">
-      Update Worker
-    </a>
-    <a href="{% url 'worker-delete' pk=worker.id%}" class="btn btn-danger link-to-page">
-      Delete Worker
-    </a>
-  </h1>
+<div class="container">
+    <h1>Worker</h1>
+    <div class="btn-group mb-3" role="group" aria-label="Worker actions">
+        <a href="{% url 'worker-update' pk=worker.id %}" class="btn btn-success">Update Worker</a>
+        <a href="{% url 'worker-delete' pk=worker.id %}" class="btn btn-danger link-to-page">Delete Worker</a>
+    </div>
 
-  <p><strong>First name:</strong> {{ worker.first_name }}</p>
-  <p><strong>Last name:</strong> {{ worker.last_name }}</p>
-  <p><strong>Position:</strong> {{ worker.position}}</p>
+    <div>
+        <p><strong>First name:</strong> {{ worker.first_name }}</p>
+        <p><strong>Last name:</strong> {{ worker.last_name }}</p>
+        <p><strong>Position:</strong> {{ worker.position }}</p>
+    </div>
 
-  <div class="ml-3">
-    <h4>Tasks</h4>
-
-    {% for task in tasks %}
-        <hr>
-        <p><strong>Type:</strong> {{ task.task_type }}</p>
-        <p><strong>Name:</strong> {{ task.name }}</p>
-        <p><strong>Dead Line:</strong> {{ task.deadline}}</p>
-        <p><strong>Priority:</strong> {{ task.priority}}</p>
-
-
-    {% empty %}
-      <p>No Tasks!</p>
-    {% endfor %}
-  </div>
+    <div class="mt-4">
+        <h4>Tasks</h4>
+        {% for task in tasks %}
+            <hr>
+            <div class="mb-3">
+                <p><strong>Type:</strong> {{ task.task_type }}</p>
+                <p><strong>Name:</strong> {{ task.name }}</p>
+                <p><strong>Deadline:</strong> {{ task.deadline }}</p>
+                <p><strong>Priority:</strong> {{ task.priority }}</p>
+            </div>
+        {% empty %}
+            <p>No Tasks!</p>
+        {% endfor %}
+    </div>
+</div>
 {% endblock %}

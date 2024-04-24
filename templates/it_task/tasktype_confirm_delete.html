@@ -1,11 +1,17 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <h1>Delete "{{ object.name }}"?</h1>
-  <form action="{% url 'task-type-delete' object.id %}" method="post">
-    {% csrf_token %}
-    <p>Are you sure you want to delete "{{ object.name }}"?</p>
-    <input type="submit" value="Yes, delete" class="btn btn-danger">
-    <a href="#" class="btn btn-secondary" onclick="window.history.back()">Cancel</a>
-  </form>
+<div class="container">
+    <h1>Delete "{{ object.name }}"?</h1>
+    <div class="card card-custom">
+        <div class="card-body">
+            <form action="{% url 'task-type-delete' object.id %}" method="post">
+                {% csrf_token %}
+                <p>Are you sure you want to delete "{{ object.name }}"?</p>
+                <button type="submit" class="btn btn-danger">Yes, delete</button>
+                <a href="#" class="btn btn-secondary" onclick="window.history.back()">Cancel</a>
+            </form>
+        </div>
+    </div>
+</div>
 {% endblock %}

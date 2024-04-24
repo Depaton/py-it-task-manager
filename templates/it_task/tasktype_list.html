@@ -1,50 +1,39 @@
 {% extends "base.html" %}
-{% load crispy_forms_filters %}
+{% load crispy_forms_tags %}
 
 {% block content %}
-  <h1>
-    Task Type List
-    <a href="{% url 'task-type-create'%}" class="btn btn-primary link-to-page">
-      Create
-    </a>
-    {% load crispy_forms_tags %}
-
-  <form action="" method="get" class="form-inline">
-  {{ search_form|crispy }}
-  <input type="submit" class="btn btn-success">
-  </form>
-
-  </h1>
-    </form>
-  {% if task_type_list %}
+<div class="container">
+    <h1>Task Type List</h1>
+    <div class="btn-toolbar mb-3" role="toolbar">
+        <div class="btn-group mr-2" role="group">
+            <a href="{% url 'task-type-create' %}" class="btn btn-primary">Create</a>
+        </div>
+        <form action="" method="get" class="form-inline">
+            {{ search_form|crispy }}
+            <button type="submit" class="btn btn-success ml-2">Search</button>
+        </form>
+    </div>
+    {% if task_type_list %}
     <table class="table">
-      <tr>
-        <th>Name</th>
-        <th>Update</th>
-        <th>Delete</th>
-      </tr>
-
-      {% for task_type in task_type_list %}
-        <tr>
-          <td>
-              <a href="{% url 'task-list' pk=task_type.id%}">{{ task_type.name }}</a>
-          </td>
-          <td>
-              <a href="{% url 'task-type-update' pk=task_type.id%}">
-                Update
-              </a>
-            </td>
-            <td>
-              <a style="color: red"
-                href="{% url 'task-type-delete' pk=task_type.id%}">
-                Delete
-              </a>
-            </td>
-        </tr>
-      {% endfor %}
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Update</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for task_type in task_type_list %}
+            <tr>
+                <td><a href="{% url 'task-list' pk=task_type.id %}">{{ task_type.name }}</a></td>
+                <td><a href="{% url 'task-type-update' pk=task_type.id %}" class="btn btn-primary btn-sm">Update</a></td>
+                <td><a href="{% url 'task-type-delete' pk=task_type.id %}" class="btn btn-danger btn-sm">Delete</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
     </table>
-
-  {% else %}
-      <p>There are no task name in manager.</p>
-  {% endif %}
+    {% else %}
+    <p>There are no task types in manager.</p>
+    {% endif %}
+</div>
 {% endblock %}

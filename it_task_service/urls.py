@@ -20,7 +20,7 @@ from django.urls import path, include
 from it_task.views import TaskTypeListView, TaskTypeCreateView, TaskTypeUpdateView, TaskTypeDeleteView, \
     PositionListView, PositionCreateView, PositionUpdateView, PositionDeleteView, TaskListView, TaskCreateView, \
     TaskUpdateView, TaskDeleteView, WorkerListView, WorkerCreateView, WorkerUpdateView, WorkerDeleteView, index, \
-    TaskDetailView, WorkerDetailView
+    TaskDetailView, WorkerDetailView, change_password
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -44,5 +44,6 @@ urlpatterns = [
     path("worker-list/<int:pk>/update", WorkerUpdateView.as_view(), name="worker-update"),
     path("worker-list/<int:pk>/delete", WorkerDeleteView.as_view(), name="worker-delete"),
     path("worker-list/<int:pk>/detail", WorkerDetailView.as_view(), name="worker-detail"),
+     path('change_password/', change_password, name='change_password'),
     path('accounts/', include('django.contrib.auth.urls'))
 ]

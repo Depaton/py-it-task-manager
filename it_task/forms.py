@@ -1,5 +1,5 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm
 
 from it_task.models import Worker, Task
 
@@ -31,6 +31,19 @@ class WorkerCreationForm(UserCreationForm):
         model = Worker
         fields = UserCreationForm.Meta.fields + ("first_name", "last_name", "position",)
 
+
+class WorkerUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Worker
+        fields = ("username", "first_name", "last_name", "position",)
+
+
+class CustomPasswordChangeForm(PasswordChangeForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['old_password'].widget.attrs.update({'class': 'form-control', 'placeholder': 'Старий пароль'})
+        self.fields['new_password1'].widget.attrs.update({'class': 'form-control', 'placeholder': 'Новий пароль'})
+        self.fields['new_password2'].widget.attrs.update({'class': 'form-control', 'placeholder': 'Підтвердження нового паролю'})
 
 class TaskForm(forms.ModelForm):
     assignees = forms.ModelMultipleChoiceField(

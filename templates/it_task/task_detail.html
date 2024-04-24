@@ -1,35 +1,42 @@
 {% extends "base.html" %}
 
-{% block content %}
-  <h1>
-    {{ task.task_type }} Task - {{ task.name }}
+{% block title %}
+<title>{{ task.task_type }} Task - {{ task.name }}</title>
+{% endblock %}
 
-    <a href="{% url 'task-update' pk=task.id %}" class="btn btn-primary link-to-page">
-      Update
-    </a>
-    <a href="{% url 'task-delete' pk=task.id %}" class="btn btn-danger link-to-page">
-      Delete
-    </a>
-  </h1>
-  <div class="word-wrap">
-    <p><strong>Priority</strong> {{ task.priority }}</p>
-    <p><strong>Complete:</strong> {{ task.is_completed }}</p>
-    <div class="w-100">
-      <p><strong>Description:</strong> {{ task.description }}</p>
+{% block content %}
+<div class="container">
+    <h1>{{ task.task_type }} Task - {{ task.name }}</h1>
+    <div class="btn-toolbar mb-3" role="toolbar">
+        <div class="btn-group mr-2" role="group">
+            <a href="{% url 'task-update' pk=task.id %}" class="btn btn-primary">Update</a>
+        </div>
+        <div class="btn-group" role="group">
+            <a href="{% url 'task-delete' pk=task.id %}" class="btn btn-danger">Delete</a>
+        </div>
     </div>
-    <p><strong>Workers:</strong></p>
-  </div>
-  {% for worker in assigned_workers %}
+    <div class="word-wrap">
+        <p><strong>Priority:</strong> {{ task.priority }}</p>
+        <p><strong>Complete:</strong> {{ task.is_completed }}</p>
+        <div class="w-100">
+            <p><strong>Description:</strong> {{ task.description }}</p>
+        </div>
+        <p><strong>Workers:</strong></p>
+    </div>
+    {% if assigned_workers %}
+    <ul class="list-group ml-3">
+        {% for worker in assigned_workers %}
+        <li class="list-group-item">
+            <a href="{% url 'worker-detail' pk=worker.id %}">
+                {{ worker }}
+            </a>
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %}
     <div class="ml-3">
-      <p>
-        <a href="{% url 'worker-detail' pk=worker.id %}">
-          {{ worker }}
-        </a>
-      </p>
+        <p>No workers!</p>
     </div>
-  {% empty %}
-    <div class="ml-3">
-      <p>No workers!</p>
-    </div>
-  {% endfor %}
+    {% endif %}
+</div>
 {% endblock %}
