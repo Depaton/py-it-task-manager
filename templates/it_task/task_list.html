@@ -1,70 +1,66 @@
 {% extends "base.html" %}
 {% load crispy_forms_filters %}
+{% load crispy_forms_tags %}
 
 {% block content %}
-  <h1>
-    Task {{object.name}} List
-    <a href="{% url 'task-create'%}" class="btn btn-primary link-to-page">
-      Create
-    </a>
-    {% load crispy_forms_tags %}
+<div class="container mt-4">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h1>Task {{ object.name }} List</h1>
+  </div>
 
-  <form action="" method="get" class="form-inline">
-  {{ search_form|crispy }}
-  <input type="submit" class="btn btn-success">
-  </form>
-
-  </h1>
+  <div class="mb-4">
+    <form action="" method="get" class="d-flex">
+      {{ search_form|crispy }}
+      <button type="submit" class="btn btn-success ms-2">Search</button>
     </form>
+  </div>
+
   {% if task_list %}
-    <table class="table">
-      <tr>
-        <th>Task type</th>
-        <th>Name</th>
-        <th>Priority</th>
-        <th>Deadline</th>
-        <th>Complete</th>
-        <th>Assignees</th>
-        <th>Update</th>
-        <th>Delete</th>
-
-      </tr>
-
-      {% for task in task_list %}
+    <table class="table table-hover">
+      <thead class="thead-light">
         <tr>
+          <th>Task Type</th>
+          <th>Name</th>
+          <th>Priority</th>
+          <th>Deadline</th>
+          <th>Complete</th>
+          <th>Assignees</th>
+          <th>Update</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for task in task_list %}
+        <tr>
+          <td>{{ task.task_type }}</td>
+          <td><a href="{% url 'task-detail' pk=task.id %}">{{ task.name }}</a></td>
+          <td>{{ task.priority }}</td>
+          <td>{{ task.deadline|date:"Y-m-d" }}</td>
+          <td>{{ task.is_completed|yesno:"Yes,No" }}</td>
           <td>
-              {{ task.task_type }}
+            {% if task.assignees.exists %}
+              Assigned
+            {% else %}
+              No Workers
+            {% endif %}
           </td>
           <td>
-              <a href="{% url 'task-detail' pk=task.id%}">{{ task.name }}
-            </td>
-            <td>
-              {{ task.priority }}
-            </td>
-            <td>
-              {{ task.deadline }}
-            </td>
-            <td>
-              {{ task.is_completed }}
-            </td>
-            <td>
-              {%  if task.assignees.exists %}
-                Assigned
-              {% else %}
-                No Workers
-              {%endif%}
-            </td>
-            <td>
-              <a href="{% url 'task-update' pk=task.id%}">Update</a>
-            </td>
-            <td>
-              <a href="{% url 'task-delete' pk=task.id%}">Delete</a>
-            </td>
+            <a href="{% url 'task-update' pk=task.id %}" class="btn btn-outline-primary btn-sm">Update</a>
+          </td>
+          <td>
+            <a href="{% url 'task-delete' pk=task.id %}" class="btn btn-outline-danger btn-sm">Delete</a>
+          </td>
         </tr>
-      {% endfor %}
+        {% endfor %}
+      </tbody>
     </table>
 
   {% else %}
-      <p>There are no tasks.</p>
+    <p class="text-center">There are no tasks.</p>
   {% endif %}
+
+  <div>
+    <a href="{% url 'task-create' %}" class="btn btn-primary">Create Task</a>
+  </div>
+</div>
 {% endblock %}
