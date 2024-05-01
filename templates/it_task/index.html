@@ -1,34 +1,26 @@
 {% extends "base.html" %}
 
-{% block title %}
-<title>IT Tasks Manager Home</title>
-{% endblock %}
-
 {% block content %}
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="jumbotron jumbotron-custom">
-                <h1 class="display-4">Welcome to IT Tasks Manager</h1>
-                <p class="lead">Manage your IT tasks efficiently with our platform.</p>
-                <hr class="my-4">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="card card-custom">
-                            <div class="card-body">
-                                <h5 class="card-title">Total Number of Tasks</h5>
-                                <p class="card-text">{{ num_tasks }}</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="card card-custom">
-                            <div class="card-body">
-                                <h5 class="card-title">Total Number of Workers</h5>
-                                <p class="card-text">{{ num_workers }}</p>
-                            </div>
-                        </div>
-                    </div>
+<div class="container mt-4">
+    <h1 class="display-4">IT Tasks Manager Home</h1>
+    <p class="lead">Welcome to the Best IT Tasks Manager!</p>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card text-white bg-primary mb-3">
+                <div class="card-header">Tasks Overview</div>
+                <div class="card-body">
+                    <h5 class="card-title">Total Number of Tasks</h5>
+                    <p class="card-text">{{ num_tasks }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card text-white bg-success mb-3">
+                <div class="card-header">Workers Overview</div>
+                <div class="card-body">
+                    <h5 class="card-title">Total Number of Workers</h5>
+                    <p class="card-text">{{ num_workers }}</p>
                 </div>
             </div>
         </div>

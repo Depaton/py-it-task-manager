@@ -1,16 +1,39 @@
-<ul class="sidebar-nav list-group">
-  {% if user.is_authenticated %}
-    <li class="list-group-item">User: <a href="{% url 'worker-detail' pk=user.id %}" class="nav-link">{{ user.get_username }}</a></li>
-    <li class="list-group-item"><a href="{% url 'change_password' %}" class="nav-link">Change Password</a></li>
-    <li class="list-group-item"><a href="{% url 'logout' %}?next={{ request.path }}" class="nav-link">Logout</a></li>
-  {% else %}
-    <li class="list-group-item"><a href="{% url 'login' %}?next={{ request.path }}" class="nav-link">Login</a></li>
-  {% endif %}
-
-  <br>
-
-  <li class="list-group-item"><a href="{% url 'index' %}" class="nav-link">Home</a></li>
-  <li class="list-group-item"><a href="{% url 'task-type-list' %}" class="nav-link">Tasks</a></li>
-  <li class="list-group-item"><a href="{% url 'position-list' %}" class="nav-link">Positions</a></li>
-  <li class="list-group-item"><a href="{% url 'worker-list' %}" class="nav-link">Workers</a></li>
-</ul>
+<div class="d-flex flex-column flex-shrink-0 p-3 bg-light">
+  <ul class="nav nav-pills flex-column mb-auto">
+      <li class="nav-item">
+          <a href="{% url 'index' %}" class="nav-link {% if request.resolver_match.url_name == 'index' %}active{% endif %}" aria-current="page">
+              Home
+          </a>
+      </li>
+      <li class="nav-item">
+          <a href="{% url 'task-type-list' %}" class="nav-link {% if request.resolver_match.url_name == 'task-type-list' %}active{% endif %}">
+              Tasks
+          </a>
+      </li>
+      <li class="nav-item">
+          <a href="{% url 'position-list' %}" class="nav-link {% if request.resolver_match.url_name == 'position-list' %}active{% endif %}">
+              Positions
+          </a>
+      </li>
+      <li class="nav-item">
+          <a href="{% url 'worker-list' %}" class="nav-link {% if request.resolver_match.url_name == 'worker-list' %}active{% endif %}">
+              Workers
+          </a>
+      </li>
+  </ul>
+  <hr>
+  <div class="dropdown">
+    {% if user.is_authenticated %}
+      <a href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
+        <strong>{{ user.username }}</strong>
+      </a>
+      <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
+        <li><a class="dropdown-item" href="{% url 'change_password' %}">Change password</a></li>
+        <li><a class="dropdown-item" href="{% url 'worker-update' pk=user.id %}">User update</a></li>
+        <li><a class="dropdown-item" href="{% url 'logout' %}">Sign out</a></li>
+      </ul>
+    {% else %}
+      <a href="{% url 'login' %}" class="btn btn-primary">Login</a>
+    {% endif %}
+  </div>
+</div>

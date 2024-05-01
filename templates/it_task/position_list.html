@@ -1,45 +1,55 @@
 {% extends "base.html" %}
+{% load crispy_forms_filters %}
 {% load crispy_forms_tags %}
 
 {% block content %}
-<div class="container">
-  <h1 class="mb-4">Position List
-    <a href="{% url 'position-create' %}" class="btn btn-primary ml-2">Create</a>
-  </h1>
+<div class="container mt-4">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h1>Position List</h1>
 
-  <form action="" method="get" class="form-inline mb-3">
-    <div class="input-group">
+  </div>
+
+  <div class="mb-4">
+    <form action="" method="get" class="d-flex">
       {{ search_form|crispy }}
-      <div class="input-group-append">
-        <button type="submit" class="btn btn-success">Search</button>
-      </div>
-    </div>
-  </form>
+      <button type="submit" class="btn btn-success ms-2">Search</button>
+    </form>
+  </div>
 
   {% if position_list %}
-  <table class="table">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for position in position_list %}
-      <tr>
-        <td>
-          <a href="{% url 'worker-list-position' pk=position.id %}">{{ position.name }}</a>
-        </td>
-        <td>
-          <a href="{% url 'position-update' pk=position.id %}" class="btn btn-primary btn-sm mr-1">Update</a>
-          <a href="{% url 'position-delete' pk=position.id %}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete {{ position.name }}?')">Delete</a>
-        </td>
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
+    <table class="table table-hover">
+      <thead class="thead-light">
+        <tr>
+          <th>Name</th>
+          <th class="text-center">Update</th>
+          <th class="text-center">Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for position in position_list %}
+          <tr>
+            <td>
+              <a href="{% url 'worker-list-position' pk=position.id %}">{{ position.name }}</a>
+            </td>
+            <td class="text-center">
+              <a href="{% url 'position-update' pk=position.id %}" class="btn btn-outline-primary btn-sm">
+                Update
+              </a>
+            </td>
+            <td class="text-center">
+              <a href="{% url 'position-delete' pk=position.id %}" class="btn btn-outline-danger btn-sm" style="color: red">
+                Delete
+              </a>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
   {% else %}
-  <p>There are no positions in the manager.</p>
+    <p class="text-center">There are no positions in the manager.</p>
   {% endif %}
+  <a href="{% url 'position-create' %}" class="btn btn-primary">
+    Create Position
+  </a>
 </div>
 {% endblock %}

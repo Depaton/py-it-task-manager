@@ -1,56 +1,43 @@
-/* Custom styles for IT Tasks Manager website */
-
-/* Navbar */
-.navbar-custom {
-    background-color: #343a40; /* Dark background */
+/* Custom styles for IT service theme */
+.bg-dark {
+    background-color: #343a40 !important; /* Dark gray */
+    color: #ffffff; /* White text */
 }
 
-.navbar-custom .navbar-brand {
-    color: #fff; /* White text */
-    font-weight: bold; /* Bold font */
+.text-orange {
+    color: #ff7f0e; /* Orange */
 }
 
-.navbar-custom .navbar-nav .nav-link {
-    color: #fff; /* White text */
-    font-weight: bold; /* Bold font */
+.border-orange {
+    border-color: #ff7f0e !important; /* Orange border */
 }
 
-.navbar-custom .navbar-nav .nav-link:hover {
-    color: #f8f9fa; /* Light text on hover */
+.btn-orange {
+    background-color: #ff7f0e; /* Orange */
+    border-color: #ff7f0e; /* Orange border */
 }
 
-/* Jumbotron */
-.jumbotron-custom {
-    background-color: #007bff; /* Primary color */
-    color: #fff; /* White text */
-    padding: 3rem 1.5rem; /* Adjust padding as needed */
-    margin-bottom: 2rem; /* Add some space at the bottom */
+.btn-orange:hover {
+    background-color: #e66400; /* Darker orange on hover */
+    border-color: #e66400; /* Darker orange border on hover */
 }
 
-.jumbotron-custom h1 {
-    font-size: 3rem; /* Large heading */
-    font-weight: bold; /* Bold font */
+/* Custom styles for sidebar */
+.bg-light {
+    background-color: #f8f9fa !important; /* Light gray */
 }
 
-.jumbotron-custom p {
-    font-size: 1.5rem; /* Large paragraph */
+/* Custom styles for content */
+.bg-white {
+    background-color: #ffffff !important; /* White */
 }
 
-/* Cards */
-.card-custom {
-    margin-bottom: 20px; /* Add some space between cards */
-    background-color: #f8f9fa; /* Light gray background */
+/* Custom styles for rounded corners */
+.rounded {
+    border-radius: 8px !important; /* Rounded corners */
 }
 
-.card-custom .card-body {
-    padding: 1.5rem; /* Add padding */
-}
-
-.card-custom .card-title {
-    font-size: 1.25rem; /* Medium heading */
-    font-weight: bold; /* Bold font */
-}
-
-.card-custom .card-text {
-    font-size: 1rem; /* Normal text */
+/* Custom styles for pagination */
+.pagination {
+    margin-top: 20px;
 }

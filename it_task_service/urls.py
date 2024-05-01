@@ -44,6 +44,6 @@ urlpatterns = [
     path("worker-list/<int:pk>/update", WorkerUpdateView.as_view(), name="worker-update"),
     path("worker-list/<int:pk>/delete", WorkerDeleteView.as_view(), name="worker-delete"),
     path("worker-list/<int:pk>/detail", WorkerDetailView.as_view(), name="worker-detail"),
-     path('change_password/', change_password, name='change_password'),
+     path("change_password/", change_password, name="change_password"),
     path('accounts/', include('django.contrib.auth.urls'))
 ]
