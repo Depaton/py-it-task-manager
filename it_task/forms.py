@@ -45,6 +45,7 @@ class CustomPasswordChangeForm(PasswordChangeForm):
         self.fields['new_password1'].widget.attrs.update({'class': 'form-control', 'placeholder': 'Новий пароль'})
         self.fields['new_password2'].widget.attrs.update({'class': 'form-control', 'placeholder': 'Підтвердження нового паролю'})
 
+
 class TaskForm(forms.ModelForm):
     assignees = forms.ModelMultipleChoiceField(
         queryset=Worker.objects.all(),
@@ -77,3 +78,4 @@ class WorkerSearchForm(forms.Form):
             attrs={"placeholder": "Search by Last name"}
         )
     )
+
