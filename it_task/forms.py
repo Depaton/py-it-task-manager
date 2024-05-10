@@ -78,4 +78,3 @@ class WorkerSearchForm(forms.Form):
             attrs={"placeholder": "Search by Last name"}
         )
     )
-
