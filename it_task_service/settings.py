@@ -25,12 +25,12 @@ if os.environ.get('DEBUG') == 'True':
     from dotenv import load_dotenv
     load_dotenv()
 
-SECRET_KEY = "it_service"
+SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "django-insecure-s(*cyq((1p+!i7t*!v(2#yj)$t%4(p-lwbw0sp@e2r7q0g$x*wf")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get("DJANGO_DEBUG", "") != "False"
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["127.0.0.1"]
 
 
 # Application definition

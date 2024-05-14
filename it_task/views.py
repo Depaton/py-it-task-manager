@@ -18,7 +18,6 @@ from it_task.forms import (
 from it_task.models import Task, TaskType, Position, Worker
 
 
-@login_required
 def index(request):
     num_tasks = Task.objects.count()
     num_workers = Worker.objects.count()
